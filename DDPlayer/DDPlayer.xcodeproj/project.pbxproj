@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F52CF7C81CF468AA00886073 /* DDDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F52CF7C71CF468AA00886073 /* DDDownloadManager.m */; };
 		F56398551CE47A9000D185A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F56398541CE47A9000D185A4 /* main.m */; };
 		F56398581CE47A9000D185A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F56398571CE47A9000D185A4 /* AppDelegate.m */; };
 		F563985B1CE47A9000D185A4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F563985A1CE47A9000D185A4 /* ViewController.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F52CF7C61CF468AA00886073 /* DDDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDownloadManager.h; sourceTree = "<group>"; };
+		F52CF7C71CF468AA00886073 /* DDDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDownloadManager.m; sourceTree = "<group>"; };
 		F56398501CE47A9000D185A4 /* DDPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F56398541CE47A9000D185A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F56398561CE47A9000D185A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 		F56398521CE47A9000D185A4 /* DDPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				F52CF7C61CF468AA00886073 /* DDDownloadManager.h */,
+				F52CF7C71CF468AA00886073 /* DDDownloadManager.m */,
 				F56398561CE47A9000D185A4 /* AppDelegate.h */,
 				F56398571CE47A9000D185A4 /* AppDelegate.m */,
 				F56398591CE47A9000D185A4 /* ViewController.h */,
@@ -273,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F52CF7C81CF468AA00886073 /* DDDownloadManager.m in Sources */,
 				F563985B1CE47A9000D185A4 /* ViewController.m in Sources */,
 				F56398581CE47A9000D185A4 /* AppDelegate.m in Sources */,
 				F56398611CE47A9000D185A4 /* DDPlayer.xcdatamodeld in Sources */,
@@ -502,6 +508,7 @@
 				F56398821CE47A9000D185A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F56398831CE47A9000D185A4 /* Build configuration list for PBXNativeTarget "DDPlayerTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +517,7 @@
 				F56398851CE47A9000D185A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F56398861CE47A9000D185A4 /* Build configuration list for PBXNativeTarget "DDPlayerUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +526,7 @@
 				F56398881CE47A9000D185A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

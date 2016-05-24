@@ -22,8 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    [self setupAVFoundation];
-    [self setupLabelBorder];
+//    [self setupAVFoundation];
+//    [self setupLabelBorder];
     [self setupRippleAnimation];
 }
 
@@ -68,6 +68,8 @@
 }
 
 - (void)setupRippleAnimation {
+    
+   
     CGFloat width = 4;
     CGRect pathFrame = CGRectMake(0, 0, 4, 4);
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:pathFrame cornerRadius:width/2];
@@ -76,9 +78,9 @@
     shapeLayer.position = self.view.center;
     shapeLayer.bounds = path.bounds;
     shapeLayer.path = [path CGPath];
-    shapeLayer.strokeColor = [[UIColor colorWithRed:65/225.0 green:182/255.0 blue:251 alpha:1] CGColor];
-    shapeLayer.fillColor = [UIColor clearColor].CGColor;
-    shapeLayer.lineWidth = 0.2;
+    shapeLayer.strokeColor = [[UIColor colorWithRed:1.00f green:0.71f blue:0.71f alpha:1.00f] CGColor];
+    shapeLayer.fillColor = [UIColor colorWithRed:1.00f green:0.82f blue:0.82f alpha:1.00f].CGColor;
+    shapeLayer.lineWidth = 0.05;
     [self.view.layer addSublayer:shapeLayer];
     
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
@@ -96,7 +98,24 @@
     animation.repeatCount = HUGE_VALF;
     animation.removedOnCompletion = NO;
     [shapeLayer addAnimation:animation forKey:nil];
+    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1"]];
+//    UIView *imageView = [UIView new];
+//    imageView.image.size = CGSizeMake(20, 20);
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.backgroundColor = [UIColor whiteColor];
+    imageView.frame = CGRectMake(0, 0, 80, 80);
+    imageView.center = self.view.center;
+//    imageView.layer.borderWidth = 15;
+    imageView.layer.cornerRadius = 80/2;
+//    imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+  
     
+//    imageView.layer.masksToBounds = YES;
+    imageView.clipsToBounds = YES;
+    imageView.tintColor = [UIColor whiteColor];
+//    imageView.layer.backgroundColor = [UIColor whiteColor].CGColor;
+    [self.view addSubview:imageView];
+//    self.view.backgroundColor = [UIColor redColor];
     NSLog(@"%@",NSStringFromCGRect(shapeLayer.frame));
 }
 #pragma mark - AVCaptureMetadataOutputObjectsDelegate
