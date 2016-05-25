@@ -98,11 +98,11 @@
     animation.repeatCount = HUGE_VALF;
     animation.removedOnCompletion = NO;
     [shapeLayer addAnimation:animation forKey:nil];
-    UIImageView * imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1"]];
+    UIImageView * imageView = [[UIImageView alloc] init];
 //    UIView *imageView = [UIView new];
 //    imageView.image.size = CGSizeMake(20, 20);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.backgroundColor = [UIColor whiteColor];
+    imageView.backgroundColor = [UIColor blueColor];
     imageView.frame = CGRectMake(0, 0, 80, 80);
     imageView.center = self.view.center;
 //    imageView.layer.borderWidth = 15;

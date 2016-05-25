@@ -17,4 +17,10 @@
 @property (nonatomic, strong, readonly) NSMutableArray *downloadArray;
 /** 下载中的模型数组 */
 @property (nonatomic, strong, readonly) NSMutableArray *downloadingArray;
+/**
+ 单例
+ 
+ @return 返回单例对象
+ */
++ (instancetype)shareInstance;
 @end
