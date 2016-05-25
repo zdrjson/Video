@@ -23,4 +23,6 @@ typedef NS_ENUM(NSInteger,DDPlayerLayerGravity) {
 @property (nonatomic, copy)DDPlayerGoBackBlock goBackBlock;
 /** 设置playerLayer的填充模型 */
 @property (nonatomic, assign) DDPlayerLayerGravity playerLayerGravity;
+/** 是否有下载功能(默认是关闭) */
+@property (nonatomic, assign) BOOL hasDownload;
 @end
