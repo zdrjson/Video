@@ -60,8 +60,26 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
 @property (nonatomic, assign) BOOL playDidEnd;
 /** 进入后台 */
 @property (nonatomic, assign) BOOL didEnterBackground;
+
+#pragma mark -UITableVieCell PlayerView
+/** palyer加到tableView */
+@property (nonatomic, strong) UITableView *tableView;
+/** player所在cell的indexPath */
+@property (nonatomic, strong) NSIndexPath *indexPath;
+/** cell上imageView的tag */
+@property (nonatomic, assign) NSInteger cellImageViewTag;
+@property (nonatomic, assign) BOOL viewDisappear;
+
 @end
 
 @implementation DDPlayerView
-
+#pragma mark - lift Cycle
++ (instancetype)sharePlayerView{
+    static DDPlayerView *playerView = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        playerView = [[DDPlayerView alloc] init];
+    });
+    return playerView;
+}
 @end

@@ -34,4 +34,42 @@ typedef NS_ENUM(NSInteger,DDPlayerLayerGravity) {
  用于解决：刚打开视频播放器，就关闭改页面，maskView的延时隐藏还未执行
  */
 - (void)cancelAutoFadeOutControlBar;
+/**
+ 单例，用于列表cell上多个视频
+ */
++ (instancetype)sharePlayerView;
+/**
+ player添加到cell上
+ 
+ @param imageView 添加player的cellImageView
+ */
+- (void)addPlayerToCellImageView:(UIImageView *)imageView;
+/**
+ 重置player
+ */
+- (void)resetPlayer;
+/**
+ 在当前页面，设置新的Player的URL调用此方法
+ */
+- (void)resetToPlayerNewURL;
+/**
+ 播放
+ */
+- (void)play;
+/**
+ 暂停
+ */
+- (void)pause;
+/**
+ 用于cell上播放player
+ 
+ @param videoURL  视频的URL
+ @param tableView tableView
+ @param indexPath indexPath
+ @param tag       ImageViewTag
+ */
+- (void)setVideoURL:(NSURL *)videoURL
+      withTableView:(UITableView *)tableView
+        AtIndexPath:(NSIndexPath *)indexPath
+   withImageViewTag:(NSInteger)tag;
 @end
