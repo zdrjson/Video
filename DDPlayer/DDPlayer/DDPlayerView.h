@@ -25,4 +25,13 @@ typedef NS_ENUM(NSInteger,DDPlayerLayerGravity) {
 @property (nonatomic, assign) DDPlayerLayerGravity playerLayerGravity;
 /** 是否有下载功能(默认是关闭) */
 @property (nonatomic, assign) BOOL hasDownload;
+/** 切换分辨率传的字典(key:分部率名称，value:分辨率url) */
+@property (nonatomic, strong) NSDictionary *resolutionDic;
+/** 从xx秒开始播放视频跳转 */
+@property (nonatomic, assign) NSInteger seekTime;
+/**
+ 取消延时隐藏controlView的方法，在ViewController的delloc方法中调用
+ 用于解决：刚打开视频播放器，就关闭改页面，maskView的延时隐藏还未执行
+ */
+- (void)cancelAutoFadeOutControlBar;
 @end
