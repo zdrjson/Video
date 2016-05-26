@@ -8,7 +8,7 @@
 
 #import "DDPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import <MediaPlayer/MediaPlayer.h>
 typedef NS_ENUM(NSUInteger, PanDirection) {
     PanDirectionHorizontalMoved,   //横向移动
     PanDirectionVerticalMoved      //纵向移动
@@ -160,10 +160,57 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
         self.isCellVideo = NO;
         self.tableView = nil;
         self.indexPath = nil;
+        
     }
 }
 - (void)resetControlViewForResolution
 {
+    
+}
+/**
+ 设置Player相关参数
+ */
+- (void)configDDPlayer{
+    //初始化playerItem
+    self.playerItem = [AVPlayerItem playerItemWithURL:self.videoURL];
+    
+    //每次都重新创建Player，替换replaceCurrentItemWithPlayerItem:,改方法阻塞线程
+    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+    
+    //初始化playerLayer
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    
+    //此处为默认视频填充模式
+    self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    //添加playerLayer到self.layer
+    [self.layer insertSublayer:self.playerLayer atIndex:0];
+    
+    //初始化显示controlView为YES
+    self.isMaskShowing = YES;
+    // 延迟隐藏controlView
+    [self autoFadeOutControlBar];
+    
+    //计时器
+    [self createTimer];
+    
+    //添加手势
+    [self createGesture];
+    
+    //获取系统音量
+    [self configureVolume];
+    
+    // 本地文件不设置DDPlayerStateBuffering状态
+    if ([self.videoURL.scheme isEqualToString:@"file"]) {
+        self.state = DDPlayerStatePlaying;
+        self.isLocalVideo = YES;
+//        self.controlView.hasDownload
+    } else {
+        self.state = DDPlayerStateBuffering;
+        self.isLocalVideo = NO;
+    }
+    //开始播放
+    [self play];
+//    self.controlView
     
 }
 - (void)unlockTheScreen {
@@ -171,5 +218,63 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
 }
 - (void)resetControlView
 {
+}
+
+- (void)autoFadeOutControlBar {
+	
+}
+
+- (void)createTimer {
+	
+}
+
+- (void)createGesture {
+	
+}
+
+- (void)configureVolume{
+    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    _volumViewSlider = nil;
+    for (UIView *view in volumeView.subviews) {
+        if ([[view.class description] isEqualToString:@"MPVolumeSlider"]) {
+            _volumViewSlider = (UISlider *)view;
+            break;
+        }
+    }
+    
+    // 使用这个category的应用不会随着手机静音键打开而静音，可在手机静音下播放声音
+    NSError *setCategoryError = nil;
+    BOOL success = [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError];
+    if (!success) {
+        /** handle the error in setCategoryError */
+    }
+    
+    //监听耳机插入和拔掉通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioRouteChangeListenerCallback:) name:AVAudioSessionRouteChangeNotification object:nil];
+}
+/**
+ 耳机插入、拔出事件
+ */
+- (void)audioRouteChangeListenerCallback:(NSNotification *)notificaiton
+{
+    NSDictionary *interuptionDic = notificaiton.userInfo;
+    NSInteger routeChangeReason = [[interuptionDic valueForKey:AVAudioSessionRouteChangeReasonKey] integerValue];
+    switch (routeChangeReason) {
+        case AVAudioSessionRouteChangeReasonNewDeviceAvailable:
+            //耳机插入
+            break;
+        case AVAudioSessionRouteChangeReasonOldDeviceUnavailable:
+        {
+            // 耳机拔掉
+            // 拔掉耳机继续播放
+            [self play];
+        }
+            case AVAudioSessionRouteChangeReasonCategoryChange:
+        {
+            NSLog(@"AVAudioSessionRouteChangeReasonCategoryChange");
+        }
+        default:
+            break;
+    }
 }
 @end
