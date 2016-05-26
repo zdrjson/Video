@@ -68,8 +68,14 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
 @property (nonatomic, strong) NSIndexPath *indexPath;
 /** cell上imageView的tag */
 @property (nonatomic, assign) NSInteger cellImageViewTag;
+/** ViewController总页面是否消失 */
 @property (nonatomic, assign) BOOL viewDisappear;
-
+/** 是否在cell上播放video */
+@property (nonatomic, assign) BOOL isCellVideo;
+/** 是否缩小视频在底部 */
+@property (nonatomic, assign) BOOL isBottomVideo;
+/** 是否切换分辨率 */
+@property (nonatomic, assign) BOOL isChangeResolution;
 @end
 
 @implementation DDPlayerView
@@ -81,5 +87,89 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
         playerView = [[DDPlayerView alloc] init];
     });
     return playerView;
+}
+/**
+ 带初始化调用次方法
+ */
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self initializeThePlayer];
+    }
+    return self;
+}
+/**
+ storyboard 、xib加载playerVie会调用次方法
+ */
+- (void)awakeFromNib{
+    [self initializeThePlayer];
+}
+
+/**
+ 初始化player
+ */
+- (void)initializeThePlayer {
+    //每次播放视频都解锁屏幕锁定
+    [self unlockTheScreen];
+}
+- (void)dealloc{
+    self.playerItem = nil;
+    self.tableView = nil;
+    //移除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+/**
+ 重置player
+ */
+- (void)resetPlayer{
+    
+    //改为为播放完
+    self.playDidEnd = NO;
+    self.playerItem = nil;
+    self.didEnterBackground = NO;
+    //视频跳转秒数置0
+    self.seekTime = 0;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //关闭定时器
+    [self.timer invalidate];
+    //暂停
+    [self pause];
+    //移除原来的layer
+    [self.playerLayer removeFromSuperlayer];
+    //替换PlayerItem为nil
+    [self.player replaceCurrentItemWithPlayerItem:nil];
+    //把player置为nil
+    self.player = nil;
+    if (self.isChangeResolution) {
+        [self.controlView resetControlViewForResolution];
+        self.isChangeResolution = NO;
+    } else { //重置控制层View
+        [self.controlView resetControlView];
+    }
+    // 非重播时，移除当前playerView
+    if (!self.repeatToPlay) {
+        [self removeFromSuperview];
+    }
+    //底部播放video改为NO
+    self.isBottomVideo = NO;
+    // cell上播放视频 && 不是重播时
+    if (self.isCellVideo && !self.repeatToPlay) {
+        //vicontroller中页面消失
+        self.viewDisappear = YES;
+        self.isCellVideo = NO;
+        self.tableView = nil;
+        self.indexPath = nil;
+    }
+}
+- (void)resetControlViewForResolution
+{
+    
+}
+- (void)unlockTheScreen {
+	
+}
+- (void)resetControlView
+{
 }
 @end
