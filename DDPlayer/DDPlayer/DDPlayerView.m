@@ -307,4 +307,26 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
         }];
     }
 }
+- (void)setPlayerItem:(AVPlayerItem *)playerItem {
+    if (_playerItem == playerItem) {
+        return;
+    }
+    if (_playerItem) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:_playerItem];
+        [_playerItem removeObserver:self forKeyPath:@"status"];
+        [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+        [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+        [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+    }
+    _playerItem = playerItem;
+    if (playerItem) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+        [playerItem addObserver:self forKeyPath:@"loadTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+        //缓冲区空了，需要等待数据
+        [playerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
+        //缓冲区有足够数据 可以播放了
+        [playerItem addObserver:self forKeyPath:@"playbackLikeToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    
+}
 @end
