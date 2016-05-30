@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DDSessionModel.h"
 
 @interface DDDownloadManager : NSObject
 /** 保存所有下载相关信息字典 */
@@ -23,4 +24,22 @@
  @return 返回单例对象
  */
 + (instancetype)shareInstance;
+/**
+ 归档
+ */
+- (void)save:(NSArray *)sessionModels;
+/**
+ 读取model
+ */
+- (NSArray *)getSessionModels;
+/**
+ 开启任务下载资源
+ 
+ @param url           下载地址
+ @param progressBlock 回调下载进度
+ @param stateBlock    下载状态
+ */
+- (void)download:(NSString *)url
+        progress:(DDDownloadProgressBlock)progressBlock
+           state:(DDDownloadStateBlock)stateBlock;
 @end

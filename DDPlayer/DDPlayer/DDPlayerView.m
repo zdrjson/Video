@@ -50,6 +50,8 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
 @property (nonatomic, assign) BOOL isVolume;
 /** 是否显示controlView */
 @property (nonatomic, assign) BOOL isMaskShowing;
+/** 是否被用户暂停 */
+@property (nonatomic, assign) BOOL isPauseByUser;
 /** 是否播放本地文件 */
 @property (nonatomic, assign) BOOL isLocalVideo;
 /** slider上次的值 */
@@ -275,6 +277,34 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
         }
         default:
             break;
+    }
+}
+/**
+ 从xx秒开始播放视频跳转
+ 
+ @param dragedSeconds     视频跳转的秒数
+ */
+- (void)seekToTime:(NSInteger)dragedSeconds completionHandler:(void (^)(BOOL finished))completionHandler {
+    if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
+        // seekTime:completionHandler:不能精确定位
+        // 如果需要精确定位，可以使用seekToTime:toleranceBefore:toleranceAfter:completionHandler:
+        // 转换成CMTime才能给player来控制播放进度
+        CMTime dragedCMTime = CMTimeMake(dragedSeconds, 1);
+        [self.player seekToTime:dragedCMTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero completionHandler:^(BOOL finished) {
+            // 视频跳转回调
+            if (completionHandler) {
+                completionHandler(finished);
+            }
+            //如果点击了暂停按钮
+            if (self.isPauseByUser) {
+                return;
+            }
+            [self player];
+            self.seekTime = 0;
+            if (!self.playerItem.isPlaybackLikelyToKeepUp && !self.isLocalVideo) {
+                self.state = DDPlayerStateBuffering;
+            }
+        }];
     }
 }
 @end

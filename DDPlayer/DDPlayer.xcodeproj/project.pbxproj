@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F51055C41CFC2D7500F4B4AD /* DDSessionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F51055C31CFC2D7400F4B4AD /* DDSessionModel.m */; };
 		F51D61D41CF5530B002D6C8F /* DDPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F51D61D31CF5530B002D6C8F /* DDPlayerView.m */; };
 		F52CF7C81CF468AA00886073 /* DDDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F52CF7C71CF468AA00886073 /* DDDownloadManager.m */; };
 		F56398551CE47A9000D185A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F56398541CE47A9000D185A4 /* main.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F51055C21CFC2D7400F4B4AD /* DDSessionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDSessionModel.h; sourceTree = "<group>"; };
+		F51055C31CFC2D7400F4B4AD /* DDSessionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDSessionModel.m; sourceTree = "<group>"; };
 		F51D61D21CF5530B002D6C8F /* DDPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPlayerView.h; sourceTree = "<group>"; };
 		F51D61D31CF5530B002D6C8F /* DDPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPlayerView.m; sourceTree = "<group>"; };
 		F52CF7C61CF468AA00886073 /* DDDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDownloadManager.h; sourceTree = "<group>"; };
@@ -113,6 +116,8 @@
 				F52CF7C71CF468AA00886073 /* DDDownloadManager.m */,
 				F51D61D21CF5530B002D6C8F /* DDPlayerView.h */,
 				F51D61D31CF5530B002D6C8F /* DDPlayerView.m */,
+				F51055C21CFC2D7400F4B4AD /* DDSessionModel.h */,
+				F51055C31CFC2D7400F4B4AD /* DDSessionModel.m */,
 				F56398561CE47A9000D185A4 /* AppDelegate.h */,
 				F56398571CE47A9000D185A4 /* AppDelegate.m */,
 				F56398591CE47A9000D185A4 /* ViewController.h */,
@@ -285,6 +290,7 @@
 			files = (
 				F52CF7C81CF468AA00886073 /* DDDownloadManager.m in Sources */,
 				F563985B1CE47A9000D185A4 /* ViewController.m in Sources */,
+				F51055C41CFC2D7500F4B4AD /* DDSessionModel.m in Sources */,
 				F56398581CE47A9000D185A4 /* AppDelegate.m in Sources */,
 				F56398611CE47A9000D185A4 /* DDPlayer.xcdatamodeld in Sources */,
 				F56398551CE47A9000D185A4 /* main.m in Sources */,
