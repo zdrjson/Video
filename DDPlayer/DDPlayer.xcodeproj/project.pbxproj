@@ -19,6 +19,7 @@
 		F56398661CE47A9000D185A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F56398641CE47A9000D185A4 /* LaunchScreen.storyboard */; };
 		F56398711CE47A9000D185A4 /* DDPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F56398701CE47A9000D185A4 /* DDPlayerTests.m */; };
 		F563987C1CE47A9000D185A4 /* DDPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F563987B1CE47A9000D185A4 /* DDPlayerUITests.m */; };
+		F57D72051CFD412D00100FF6 /* DDPlayerControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = F57D72041CFD412D00100FF6 /* DDPlayerControlView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,9 @@
 		F56398771CE47A9000D185A4 /* DDPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DDPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F563987B1CE47A9000D185A4 /* DDPlayerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DDPlayerUITests.m; sourceTree = "<group>"; };
 		F563987D1CE47A9000D185A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F57D72021CFD401500100FF6 /* DDPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPlayer.h; sourceTree = "<group>"; };
+		F57D72031CFD412D00100FF6 /* DDPlayerControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPlayerControlView.h; sourceTree = "<group>"; };
+		F57D72041CFD412D00100FF6 /* DDPlayerControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPlayerControlView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,9 @@
 				F52CF7C71CF468AA00886073 /* DDDownloadManager.m */,
 				F51D61D21CF5530B002D6C8F /* DDPlayerView.h */,
 				F51D61D31CF5530B002D6C8F /* DDPlayerView.m */,
+				F57D72021CFD401500100FF6 /* DDPlayer.h */,
+				F57D72031CFD412D00100FF6 /* DDPlayerControlView.h */,
+				F57D72041CFD412D00100FF6 /* DDPlayerControlView.m */,
 				F51055C21CFC2D7400F4B4AD /* DDSessionModel.h */,
 				F51055C31CFC2D7400F4B4AD /* DDSessionModel.m */,
 				F56398561CE47A9000D185A4 /* AppDelegate.h */,
@@ -289,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F52CF7C81CF468AA00886073 /* DDDownloadManager.m in Sources */,
+				F57D72051CFD412D00100FF6 /* DDPlayerControlView.m in Sources */,
 				F563985B1CE47A9000D185A4 /* ViewController.m in Sources */,
 				F51055C41CFC2D7500F4B4AD /* DDSessionModel.m in Sources */,
 				F56398581CE47A9000D185A4 /* AppDelegate.m in Sources */,

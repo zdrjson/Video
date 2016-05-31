@@ -9,6 +9,7 @@
 #import "DDPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "DDPlayer.h"
 typedef NS_ENUM(NSUInteger, PanDirection) {
     PanDirectionHorizontalMoved,   //横向移动
     PanDirectionVerticalMoved      //纵向移动
@@ -320,13 +321,26 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
     }
     _playerItem = playerItem;
     if (playerItem) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
         [playerItem addObserver:self forKeyPath:@"loadTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
         //缓冲区空了，需要等待数据
         [playerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
         //缓冲区有足够数据 可以播放了
         [playerItem addObserver:self forKeyPath:@"playbackLikeToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
     }
-    
+}
+
+#pragma mark - NSNotification Action
+- (void)moviePlayDidEnd:(NSNotification *)notification {
+    self.state = DDPlayerStateStopped;
+    if (self.isBottomVideo && !self.isFullScreen) { //播放完了，如果是在小屏模式 && 在bottom位置，直接关闭播放器
+        self.repeatToPlay = NO;
+        self.playDidEnd = NO;
+        [self resetPlayer];
+    } else {
+        self.controlView.backgroundColor = RGBA(0, 0, 0, .6);
+        self.playDidEnd = YES;
+//        self.controlView
+    }
 }
 @end
