@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DDPlayerControlView : UIView
+/** 重播按钮 */
+@property (nonatomic, strong, readonly) UIButton                *repeatBtn;
 
 @end

@@ -10,6 +10,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "DDPlayer.h"
+#import "DDPlayerControlView.h"
+
+static const CGFloat DDPlayerAnimationTimeInterval = 7.0f;
+static const CGFloat DDPlayerControlBarAutoFadeOutTimeInterval = 0.5f;
+
+
 typedef NS_ENUM(NSUInteger, PanDirection) {
     PanDirectionHorizontalMoved,   //横向移动
     PanDirectionVerticalMoved      //纵向移动
@@ -24,7 +30,7 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
 };
 
 
-@interface DDPlayerView ()
+@interface DDPlayerView () <UIGestureRecognizerDelegate>
 /** 播放属性 */
 @property (nonatomic, strong) AVPlayer *player;
 /** 播放属性 */
@@ -36,7 +42,7 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
 /** 计时器 */
 @property (nonatomic, strong) NSTimer *timer;
 /** 控制层View */
-@property (nonatomic, strong) DDPlayerView *controlView;
+@property (nonatomic, strong) DDPlayerControlView *controlView;
 /** 用来保存快进的总时长 */
 @property (nonatomic, assign) CGFloat subTime;
 /** 定义一个实例变量，保存枚举值 */
@@ -145,10 +151,11 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
     //把player置为nil
     self.player = nil;
     if (self.isChangeResolution) {
-        [self.controlView resetControlViewForResolution];
+//        [self.controlView resetControlViewForResolution];  
         self.isChangeResolution = NO;
     } else { //重置控制层View
-        [self.controlView resetControlView];
+//        [self.controlView resetControlView];
+        
     }
     // 非重播时，移除当前playerView
     if (!self.repeatToPlay) {
@@ -340,7 +347,63 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
     } else {
         self.controlView.backgroundColor = RGBA(0, 0, 0, .6);
         self.playDidEnd = YES;
-//        self.controlView
+        self.controlView.repeatBtn.hidden = NO;
+        //初始化显示controlView为YES
+        self.isMaskShowing = NO;
+        [self animateShow];
     }
+}
+
+/**
+ 显示控制层
+ */
+- (void)animateShow {
+	if (self.isMaskShowing)  return;
+    [UIView animateWithDuration:DDPlayerControlBarAutoFadeOutTimeInterval animations:^{
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+#pragma mark - KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+    if (object == self.player.currentItem) {
+        if ([keyPath isEqualToString:@"status"]) {
+            if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
+                self.state = DDPlayerStatePlaying;
+                // 加载完成后，再添加平移手势
+                // 添加平移手势，用来控制音量，亮度、快进快退
+                UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panDirection:)];
+                pan.delegate = self;
+                [self addGestureRecognizer:pan];
+                
+                //跳到xx秒播放视频
+                if (self.seekTime) {
+                    [self seekToTime:self.seekTime completionHandler:nil];
+                }
+                
+            } else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
+                self.state = DDPlayerStateFailed;
+//                self.controlView.
+            }
+        }
+        else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+          //计算缓冲进度
+            NSTimeInterval timeInterval = [self availableDuration];
+        }
+    } 
+}
+/**
+ 计算缓冲进度
+ 
+ @return 缓冲进度
+ */
+- (NSTimeInterval )availableDuration {
+    NSArray *loadedTimeRanges = [[_player currentItem] loadedTimeRanges];
+    CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];  //获取缓冲区域
+    float startSeconds = CMTimeGetSeconds(timeRange.start);
+    float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+    NSTimeInterval result= startSeconds + durationSeconds; // 计算缓冲总进度
+    return result;
 }
 @end
