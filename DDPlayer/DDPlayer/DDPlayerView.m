@@ -393,9 +393,29 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
         }
     } 
 }
+#pragma mark - 计时器事件
+/**
+ 计时器事件
+ */
+- (void)playerTimerAction {
+    if (_playerItem.duration.timescale != 0) {
+        self.controlView.videoSlider.value = CMTimeGetSeconds([_playerItem currentTime])/
+        (_playerItem.duration.value / _playerItem.duration.timescale);//当前进度
+        
+        //当前时长进度progress
+        NSInteger proMin = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
+        NSInteger proSec = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+        
+        //duration 总时长
+        NSInteger durMin = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60; //总秒
+        NSInteger durSec = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60; //总分钟
+        
+        self.controlView.currentTimeLabel.text = [NSString stringWithFormat:@"%02zd:%02zd",proMin, proSec];
+        self.controlView.totalTimeLabel.text = [NSString stringWithFormat:@"%02zd:%02zd",durMin, durSec];
+    }
+}
 /**
  计算缓冲进度
- 
  @return 缓冲进度
  */
 - (NSTimeInterval )availableDuration {
