@@ -23,5 +23,47 @@
 @end
 
 @implementation DDDownloadManager
+- (NSMutableDictionary *)tasks
+{
+    if (!_tasks) {
+        _tasks = [[NSMutableDictionary alloc] init];
+    }
+    return _tasks;
+}
+- (NSMutableDictionary *)sessionModels
+{
+    if (!_sessionModels) {
+        _sessionModels = @{}.mutableCopy;
+    }
+    return _sessionModels;
+}
+- (NSMutableArray *)sessionModelsArray
+{
+    if (!_sessinModelsArray) {
+        _sessinModelsArray =@[].mutableCopy;
+        [_sessinModelsArray addObjectsFromArray:[self getSessionModels]];
+    }
+    return _sessinModelsArray;
+}
+static DDDownloadManager *_downloadManger;
++ (instancetype)allocWithZone:(struct _NSZone *)zone
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _downloadManger = [super allocWithZone:zone];
+    });
+    return _downloadManger;
+}
+-(id)copyWithZone:(NSZone *)zone{
+    return _downloadManger;
+}
++ (instancetype)shareInstance{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _downloadManger = [[self alloc] init];
+    });
+    return _downloadManger;
+}
+
 
 @end
