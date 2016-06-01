@@ -64,6 +64,19 @@ static DDDownloadManager *_downloadManger;
     });
     return _downloadManger;
 }
-
-
+/**
+ 归档
+ */
+- (void)save:(NSArray *)sessionModels{
+    //文件信息
+   [NSKeyedArchiver archiveRootObject:sessionModels toFile:DDDownloadDetailPath];
+}
+/**
+ 读取model
+ */
+- (NSArray *)getSessionModels {
+    //文件信息
+    NSArray *sessionModels = [NSKeyedUnarchiver unarchiveObjectWithFile:DDDownloadDetailPath];
+    return sessionModels;
+}
 @end

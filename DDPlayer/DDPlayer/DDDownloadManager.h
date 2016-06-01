@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "DDSessionModel.h"
+// 缓存主目录
+#define DDCachesDirectory [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"DDCache"]
+
+#define DDDownloadDetailPath [DDCachesDirectory stringByAppendingPathComponent:@"downloadDetail.data"]
 
 @interface DDDownloadManager : NSObject
 /** 保存所有下载相关信息字典 */
