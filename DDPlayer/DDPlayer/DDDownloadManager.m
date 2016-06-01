@@ -13,6 +13,13 @@
 @property (nonatomic, strong) NSMutableDictionary *tasks;
 /** 保存所有下载相关信息字典 */
 @property (nonatomic, strong) NSMutableDictionary *sessionModels;
+/** 所有本地存储的所有下载信息数据数组 */
+@property (nonatomic, strong) NSMutableArray *sessinModelsArray;
+/** 下载完成的模型数组 */
+@property (nonatomic, strong) NSMutableArray *downloadArray;
+/** 下载中的模型数组 */
+@property (nonatomic, strong) NSMutableArray *downloadingArray;
+
 @end
 
 @implementation DDDownloadManager
