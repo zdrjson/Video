@@ -79,4 +79,44 @@ static DDDownloadManager *_downloadManger;
     NSArray *sessionModels = [NSKeyedUnarchiver unarchiveObjectWithFile:DDDownloadDetailPath];
     return sessionModels;
 }
+/**
+ 创建缓存目录文件
+ */
+- (void)createCacheDirectory {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:DDCachesDirectory]) {
+        [fileManager createDirectoryAtPath:DDCachesDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
+    }
+}
+- (void)download:(NSString *)url progress:(DDDownloadProgressBlock)progressBlock state:(DDDownloadStateBlock)stateBlock {
+    //url为空
+    if (!url) {
+        return;
+    }
+    //已经下载过了
+    if ([self isCompletion:url]) {
+        stateBlock(DDSessionModelCompleted);
+        NSLog(@"文件已经下载过");
+        return;
+    }
+    
+    //暂停
+    if ([self.tasks valueForKey:DDFileName(url)]) {
+        
+    }
+}
+- (void)handle:(NSString *)url {
+    NSURLSessionDataTask *task = [self getTask:url];
+    if (task.state == NSURLSessionTaskStateRunning) {
+        [self pause:url];
+    } else {
+        [self start:url];
+    }
+}
+/**
+ 根据url获得对应的下线任务
+ */
+- (NSURLSessionDataTask *)getTask:(NSString *)url {
+    return (NSURLSessionDataTask *)[self.tasks valueForKey:DDFileName(url)];
+}
 @end
