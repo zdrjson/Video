@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F545996B1CFECDDC00413AA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F545996A1CFECDDC00413AA8 /* main.m */; };
+		F545996E1CFECDDC00413AA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F545996D1CFECDDC00413AA8 /* AppDelegate.m */; };
+		F54599711CFECDDC00413AA8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F54599701CFECDDC00413AA8 /* ViewController.m */; };
+		F54599741CFECDDC00413AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F54599721CFECDDC00413AA8 /* Main.storyboard */; };
+		F54599771CFECDDC00413AA8 /* MergeVideo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F54599751CFECDDC00413AA8 /* MergeVideo.xcdatamodeld */; };
+		F54599791CFECDDC00413AA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F54599781CFECDDC00413AA8 /* Assets.xcassets */; };
+		F545997C1CFECDDC00413AA8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F545997A1CFECDDC00413AA8 /* LaunchScreen.storyboard */; };
+		F54599871CFECDDC00413AA8 /* MergeVideoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54599861CFECDDC00413AA8 /* MergeVideoTests.m */; };
+		F54599921CFECDDC00413AA8 /* MergeVideoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F54599911CFECDDC00413AA8 /* MergeVideoUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F54599831CFECDDC00413AA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F545995E1CFECDDC00413AA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F54599651CFECDDC00413AA8;
+			remoteInfo = MergeVideo;
+		};
+		F545998E1CFECDDC00413AA8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F545995E1CFECDDC00413AA8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F54599651CFECDDC00413AA8;
+			remoteInfo = MergeVideo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F54599661CFECDDC00413AA8 /* MergeVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MergeVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F545996A1CFECDDC00413AA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F545996C1CFECDDC00413AA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F545996D1CFECDDC00413AA8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F545996F1CFECDDC00413AA8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F54599701CFECDDC00413AA8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F54599731CFECDDC00413AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F54599761CFECDDC00413AA8 /* MergeVideo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MergeVideo.xcdatamodel; sourceTree = "<group>"; };
+		F54599781CFECDDC00413AA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F545997B1CFECDDC00413AA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F545997D1CFECDDC00413AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F54599821CFECDDC00413AA8 /* MergeVideoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MergeVideoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F54599861CFECDDC00413AA8 /* MergeVideoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeVideoTests.m; sourceTree = "<group>"; };
+		F54599881CFECDDC00413AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F545998D1CFECDDC00413AA8 /* MergeVideoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MergeVideoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F54599911CFECDDC00413AA8 /* MergeVideoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MergeVideoUITests.m; sourceTree = "<group>"; };
+		F54599931CFECDDC00413AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F54599631CFECDDC00413AA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F545997F1CFECDDC00413AA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F545998A1CFECDDC00413AA8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F545995D1CFECDDC00413AA8 = {
+			isa = PBXGroup;
+			children = (
+				F54599681CFECDDC00413AA8 /* MergeVideo */,
+				F54599851CFECDDC00413AA8 /* MergeVideoTests */,
+				F54599901CFECDDC00413AA8 /* MergeVideoUITests */,
+				F54599671CFECDDC00413AA8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F54599671CFECDDC00413AA8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F54599661CFECDDC00413AA8 /* MergeVideo.app */,
+				F54599821CFECDDC00413AA8 /* MergeVideoTests.xctest */,
+				F545998D1CFECDDC00413AA8 /* MergeVideoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F54599681CFECDDC00413AA8 /* MergeVideo */ = {
+			isa = PBXGroup;
+			children = (
+				F545996C1CFECDDC00413AA8 /* AppDelegate.h */,
+				F545996D1CFECDDC00413AA8 /* AppDelegate.m */,
+				F545996F1CFECDDC00413AA8 /* ViewController.h */,
+				F54599701CFECDDC00413AA8 /* ViewController.m */,
+				F54599721CFECDDC00413AA8 /* Main.storyboard */,
+				F54599781CFECDDC00413AA8 /* Assets.xcassets */,
+				F545997A1CFECDDC00413AA8 /* LaunchScreen.storyboard */,
+				F545997D1CFECDDC00413AA8 /* Info.plist */,
+				F54599751CFECDDC00413AA8 /* MergeVideo.xcdatamodeld */,
+				F54599691CFECDDC00413AA8 /* Supporting Files */,
+			);
+			path = MergeVideo;
+			sourceTree = "<group>";
+		};
+		F54599691CFECDDC00413AA8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F545996A1CFECDDC00413AA8 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F54599851CFECDDC00413AA8 /* MergeVideoTests */ = {
+			isa = PBXGroup;
+			children = (
+				F54599861CFECDDC00413AA8 /* MergeVideoTests.m */,
+				F54599881CFECDDC00413AA8 /* Info.plist */,
+			);
+			path = MergeVideoTests;
+			sourceTree = "<group>";
+		};
+		F54599901CFECDDC00413AA8 /* MergeVideoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F54599911CFECDDC00413AA8 /* MergeVideoUITests.m */,
+				F54599931CFECDDC00413AA8 /* Info.plist */,
+			);
+			path = MergeVideoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F54599651CFECDDC00413AA8 /* MergeVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F54599961CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideo" */;
+			buildPhases = (
+				F54599621CFECDDC00413AA8 /* Sources */,
+				F54599631CFECDDC00413AA8 /* Frameworks */,
+				F54599641CFECDDC00413AA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MergeVideo;
+			productName = MergeVideo;
+			productReference = F54599661CFECDDC00413AA8 /* MergeVideo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F54599811CFECDDC00413AA8 /* MergeVideoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F54599991CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideoTests" */;
+			buildPhases = (
+				F545997E1CFECDDC00413AA8 /* Sources */,
+				F545997F1CFECDDC00413AA8 /* Frameworks */,
+				F54599801CFECDDC00413AA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F54599841CFECDDC00413AA8 /* PBXTargetDependency */,
+			);
+			name = MergeVideoTests;
+			productName = MergeVideoTests;
+			productReference = F54599821CFECDDC00413AA8 /* MergeVideoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F545998C1CFECDDC00413AA8 /* MergeVideoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F545999C1CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideoUITests" */;
+			buildPhases = (
+				F54599891CFECDDC00413AA8 /* Sources */,
+				F545998A1CFECDDC00413AA8 /* Frameworks */,
+				F545998B1CFECDDC00413AA8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F545998F1CFECDDC00413AA8 /* PBXTargetDependency */,
+			);
+			name = MergeVideoUITests;
+			productName = MergeVideoUITests;
+			productReference = F545998D1CFECDDC00413AA8 /* MergeVideoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F545995E1CFECDDC00413AA8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = zdrjson;
+				TargetAttributes = {
+					F54599651CFECDDC00413AA8 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					F54599811CFECDDC00413AA8 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F54599651CFECDDC00413AA8;
+					};
+					F545998C1CFECDDC00413AA8 = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = F54599651CFECDDC00413AA8;
+					};
+				};
+			};
+			buildConfigurationList = F54599611CFECDDC00413AA8 /* Build configuration list for PBXProject "MergeVideo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F545995D1CFECDDC00413AA8;
+			productRefGroup = F54599671CFECDDC00413AA8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F54599651CFECDDC00413AA8 /* MergeVideo */,
+				F54599811CFECDDC00413AA8 /* MergeVideoTests */,
+				F545998C1CFECDDC00413AA8 /* MergeVideoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F54599641CFECDDC00413AA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F545997C1CFECDDC00413AA8 /* LaunchScreen.storyboard in Resources */,
+				F54599791CFECDDC00413AA8 /* Assets.xcassets in Resources */,
+				F54599741CFECDDC00413AA8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F54599801CFECDDC00413AA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F545998B1CFECDDC00413AA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F54599621CFECDDC00413AA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F54599711CFECDDC00413AA8 /* ViewController.m in Sources */,
+				F545996E1CFECDDC00413AA8 /* AppDelegate.m in Sources */,
+				F54599771CFECDDC00413AA8 /* MergeVideo.xcdatamodeld in Sources */,
+				F545996B1CFECDDC00413AA8 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F545997E1CFECDDC00413AA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F54599871CFECDDC00413AA8 /* MergeVideoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F54599891CFECDDC00413AA8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F54599921CFECDDC00413AA8 /* MergeVideoUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F54599841CFECDDC00413AA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F54599651CFECDDC00413AA8 /* MergeVideo */;
+			targetProxy = F54599831CFECDDC00413AA8 /* PBXContainerItemProxy */;
+		};
+		F545998F1CFECDDC00413AA8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F54599651CFECDDC00413AA8 /* MergeVideo */;
+			targetProxy = F545998E1CFECDDC00413AA8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F54599721CFECDDC00413AA8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F54599731CFECDDC00413AA8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F545997A1CFECDDC00413AA8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F545997B1CFECDDC00413AA8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F54599941CFECDDC00413AA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F54599951CFECDDC00413AA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F54599971CFECDDC00413AA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MergeVideo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F54599981CFECDDC00413AA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MergeVideo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F545999A1CFECDDC00413AA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MergeVideoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MergeVideo.app/MergeVideo";
+			};
+			name = Debug;
+		};
+		F545999B1CFECDDC00413AA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MergeVideoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MergeVideo.app/MergeVideo";
+			};
+			name = Release;
+		};
+		F545999D1CFECDDC00413AA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MergeVideoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MergeVideo;
+			};
+			name = Debug;
+		};
+		F545999E1CFECDDC00413AA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MergeVideoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MergeVideo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F54599611CFECDDC00413AA8 /* Build configuration list for PBXProject "MergeVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F54599941CFECDDC00413AA8 /* Debug */,
+				F54599951CFECDDC00413AA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F54599961CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F54599971CFECDDC00413AA8 /* Debug */,
+				F54599981CFECDDC00413AA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F54599991CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F545999A1CFECDDC00413AA8 /* Debug */,
+				F545999B1CFECDDC00413AA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F545999C1CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F545999D1CFECDDC00413AA8 /* Debug */,
+				F545999E1CFECDDC00413AA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F54599751CFECDDC00413AA8 /* MergeVideo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F54599761CFECDDC00413AA8 /* MergeVideo.xcdatamodel */,
+			);
+			currentVersion = F54599761CFECDDC00413AA8 /* MergeVideo.xcdatamodel */;
+			path = MergeVideo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F545995E1CFECDDC00413AA8 /* Project object */;
+}
