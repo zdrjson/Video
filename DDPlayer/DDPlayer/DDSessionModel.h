@@ -21,6 +21,29 @@ typedef NS_ENUM(NSInteger, DDDownloadState) {
 typedef void(^DDDownloadProgressBlock)(CGFloat progress, NSString *speed, NSString *remainintTime, NSString *writtenSize, NSString *totalSize);
 typedef void(^DDDownloadStateBlock) (DDDownloadState state);
 
-@interface DDSessionModel : NSObject
+@interface DDSessionModel : NSObject <NSCoding>
+/** 流 */
+@property (nonatomic, strong) NSOutputStream *stream;
+/** 下载地址 */
+@property (nonatomic, copy) NSString *url;
+/** 开始下载时间 */
+@property (nonatomic, strong) NSDate *starTime;
+/** 文件名 */
+@property (nonatomic, copy) NSString *fileName;
+/** 文件大小 */
+@property (nonatomic, copy) NSString *totalSize;
+
+/** 获得服务器这次请求 返回数据的总长度 */
+@property (nonatomic, assign) NSInteger totalLength;
+
+/** 下载进度 */
+@property (atomic, copy) DDDownloadProgressBlock progressBlock;
+
+/** 下载状态 */
+@property (atomic, copy) DDDownloadStateBlock stateBlock;
+
+- (float)calculateFieSizeInUnit:(unsigned long long)contentLength;
+
+- (NSString *)calculateUnit:(unsigned long long)contentLength;
 
 @end

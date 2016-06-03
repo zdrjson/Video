@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 @interface ViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSURL *videoURL;
@@ -77,7 +78,120 @@
             result = CMTimeSubtract(_secondAsset.duration, _firstAsset.duration);
         }
         
+        mainInstruction.timeRange = CMTimeRangeMake(kCMTimeZero, finalDuration);
+        
+        //第一个视频的架构图
+        AVMutableVideoCompositionLayerInstruction *firstLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:firstTrack];
+        [firstLayerInstruction setTransform:CGAffineTransformIdentity atTime:kCMTimeZero];
+        
+        //第二个视频的架构图
+        
+        AVMutableVideoCompositionLayerInstruction *secondLayerInstruction = [AVMutableVideoCompositionLayerInstruction videoCompositionLayerInstructionWithAssetTrack:secondTrack];
+        
+        [secondLayerInstruction setOpacityRampFromStartOpacity:0.7 toEndOpacity:0.2 timeRange:CMTimeRangeMake(kCMTimeZero, _firstAsset.duration)];
+        
+        //这个定你把数组顺序到一下，视频上下位置也跟着变了
+//        mainInstruction.layerInstructions = [NSArray arrayWithObjects:secondLayerInstruction,firstLayerInstruction, nil];
+        NSArray *layinstructions = @[firstLayerInstruction,secondLayerInstruction];
+        mainInstruction.layerInstructions = layinstructions.reverseObjectEnumerator.allObjects;
+        
+        _mainComposition = [AVMutableVideoComposition videoComposition];
+        _mainComposition.instructions = @[mainInstruction];
+        _mainComposition.frameDuration = CMTimeMake(1, 30);
+        _mainComposition.renderSize = CGSizeMake(320, 240);
+        
+        //导出路径
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        
+        NSString *documentsDirectory = paths.firstObject;
+        
+        NSString *myPathsDocs = [documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"mergeVideo.mov"]];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        [fileManager removeItemAtPath:myPathsDocs error:NULL];
+        
+        NSURL *url = [NSURL fileURLWithPath:myPathsDocs];
+        
+        NSLog(@"URL:- %@",url.description);
+        
+        //导出
+        AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:_mixComposition presetName:AVAssetExportPresetLowQuality];
+        
+        exporter.outputURL = url;
+        
+        exporter.outputFileType = AVFileTypeQuickTimeMovie;
+        
+        exporter.shouldOptimizeForNetworkUse = YES;
+        
+        exporter.videoComposition = _mainComposition;
+        
+        [exporter exportAsynchronouslyWithCompletionHandler:^{
+           dispatch_async(dispatch_get_main_queue(), ^{
+               [self exportDidFinish:exporter];
+           });
+        }];
+        
+        
+        
     }
 }
+- (void)exportDidFinish:(AVAssetExportSession *)session{
+    NSLog(@"exportDidFinish");
+    NSLog(@"session = %ld",(long)session.status);
+    
+    if (session.status == AVAssetExportSessionStatusCompleted)
+    {
+        NSURL *outputURL = session.outputURL;
+        
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:outputURL])
+        {
+            [library writeVideoAtPathToSavedPhotosAlbum:outputURL completionBlock:^(NSURL *assetURL, NSError *error) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if (error) {
+                        
+                        
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                        message:@"存档失败"
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        [alert show];
+                        
+                    }else {
+                        
+                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success"
+                                                                        message:@"存档成功"
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                        
+                        [alert show];
+                        
+                        
+                        
+                    }
+                    
+                    
+                });
+            }];
+        }
+                              
+                              
+                              
+        
+    }
+    else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"存档失败"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 
+}
 @end

@@ -420,6 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MergeVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,6 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MergeVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zdrjson.github.com.MergeVideo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -502,6 +504,7 @@
 				F54599981CFECDDC00413AA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F54599991CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideoTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +513,7 @@
 				F545999B1CFECDDC00413AA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F545999C1CFECDDC00413AA8 /* Build configuration list for PBXNativeTarget "MergeVideoUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +522,7 @@
 				F545999E1CFECDDC00413AA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

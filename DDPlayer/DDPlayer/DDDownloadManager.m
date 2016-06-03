@@ -102,8 +102,41 @@ static DDDownloadManager *_downloadManger;
     
     //暂停
     if ([self.tasks valueForKey:DDFileName(url)]) {
-        
+        [self handle:url];
+        return;
     }
+    
+    //创建缓存目录文件
+    [self createCacheDirectory];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[[NSOperationQueue alloc] init]];
+    
+    // 创建流
+    NSOutputStream *stream = [NSOutputStream outputStreamToFileAtPath:DDFileFullpath(url) append:YES];
+    
+    //创建请求
+    NSMutableURLRequest *requset = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    
+    //设置请求头
+    NSString *range = [NSString stringWithFormat:@"bytes=%zd-",DDDownloadLength(url)];
+    [requset setValue:range forHTTPHeaderField:@"Range"];
+    
+    //创建一个Data任务
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:requset];
+    NSUInteger taskIdentifier = arc4random() % ((arc4random() % 10000 + arc4random() % 10000));
+    [task setValue:@(taskIdentifier) forKey:@"taskIdentifier"];
+    //保存任务
+    [self.tasks setValue:task forKey:DDFileName(url)];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:DDFileFullpath(url)]) {
+        DDSessionModel *sessionModel = [[DDSessionModel alloc] init];
+        sessionModel.ur
+    }
+    
+    
+    
+    
 }
 - (void)handle:(NSString *)url {
     NSURLSessionDataTask *task = [self getTask:url];

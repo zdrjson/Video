@@ -10,9 +10,12 @@
 #import "DDSessionModel.h"
 // 缓存主目录
 #define DDCachesDirectory [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"DDCache"]
-
 // 保存文件名
 #define DDFileName(url) [[url componentsSeparatedByString:@"/"] lastObject]
+// 文件的存放路径(caches)
+#define DDFileFullpath(url) [DDCachesDirectory stringByAppendingPathComponent:DDFileName(url)]
+
+#define DDDownloadLength(url) [[[NSFileManager defaultManager] attributesOfItemAtPath:DDFileFullpath(url) error:nil][NSFileSize] integerValue]
 
 //存储文件信息的路径(caches)
 #define DDDownloadDetailPath [DDCachesDirectory stringByAppendingPathComponent:@"downloadDetail.data"]
