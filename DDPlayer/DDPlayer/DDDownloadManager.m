@@ -131,8 +131,31 @@ static DDDownloadManager *_downloadManger;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:DDFileFullpath(url)]) {
         DDSessionModel *sessionModel = [[DDSessionModel alloc] init];
-        sessionModel.ur
+        sessionModel.url = url;
+        sessionModel.progressBlock = progressBlock;
+        sessionModel.stateBlock = stateBlock;
+        sessionModel.stream = stream;
+        sessionModel.starTime = [NSDate date];
+        sessionModel.fileName = DDFileName(url);
+        [self.sessionModels setValue:sessionModel forKey:@(task.taskIdentifier).stringValue];
+        [self.sessionModelsArray addObject:sessionModel];
+        [self.downloadingArray addObject:sessionModel];
+        //保存
+        [self save:self.sessionModelsArray];
+    } else {
+        for (DDSessionModel *sessionModel in self.sessionModelsArray) {
+            if ([sessionModel.url isEqualToString:url]) {
+                sessionModel.url = url;
+                sessionModel.progressBlock = progressBlock;
+                sessionModel.stateBlock = stateBlock;
+                sessionModel.stream = stream;
+                sessionModel.starTime = [NSDate date];
+                sessionModel.fileName = DDFileName(url);
+                [self.sessionModels setValue:sessionModel forKey:@(task.taskIdentifier).stringValue];
+            }
+        }
     }
+    [self start:url];
     
     
     
@@ -147,9 +170,56 @@ static DDDownloadManager *_downloadManger;
     }
 }
 /**
+ 开始下载
+ */
+- (void)start:(NSString *)url {
+    NSURLSessionDataTask *task = [self getTask:url];
+    [task resume];
+    
+    [self getSessionModel:task.taskIdentifier].stateBlock(DDSessionModelStart);
+}
+/**
+ 暂停下载
+ */
+- (void)pause:(NSString *)url {
+    NSURLSessionDataTask *task = [self getTask:url];
+    [task suspend];
+    
+    [self getSessionModel:task.taskIdentifier].stateBlock(DDSessionModelSuspened);
+}
+/**
  根据url获得对应的下线任务
  */
 - (NSURLSessionDataTask *)getTask:(NSString *)url {
     return (NSURLSessionDataTask *)[self.tasks valueForKey:DDFileName(url)];
+}
+/**
+ 根据url获得对象的下载模型
+ */
+- (DDSessionModel *)getSessionModel:(NSUInteger)taskIdentifier {
+    return (DDSessionModel *)self.sessionModels[@(taskIdentifier).stringValue];
+}
+/**
+ 判断该文件是否下载完成
+ */
+- (BOOL)isCompletion:(NSString *)url {
+    return ([self fileTotalLength:url] && DDDownloadLength(url) == [self fileTotalLength:url]);
+}
+/**
+ 查询改资源的下载进度值
+ */
+- (CGFloat)progress:(NSString *)url {
+    return [self fileTotalLength:url] == 0 ? 0.0 : 1.0 * DDDownloadLength(url)/ [self fileTotalLength:url];
+}
+/**
+ 查询改资源的下载进度值
+ */
+- (NSInteger)fileTotalLength:(NSString *)url {
+    for (DDSessionModel *model in self.sessionModelsArray) {
+        if ([model.url isEqualToString:url]) {
+            return model.totalLength;
+        }
+    }
+    return 0;
 }
 @end
