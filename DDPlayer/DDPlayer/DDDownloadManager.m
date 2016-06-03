@@ -14,9 +14,9 @@
 /** 保存所有下载相关信息字典 */
 @property (nonatomic, strong) NSMutableDictionary *sessionModels;
 /** 所有本地存储的所有下载信息数据数组 */
-@property (nonatomic, strong) NSMutableArray *sessinModelsArray;
+@property (nonatomic, strong) NSMutableArray *sessionModelsArray;
 /** 下载完成的模型数组 */
-@property (nonatomic, strong) NSMutableArray *downloadArray;
+@property (nonatomic, strong) NSMutableArray *downloadedArray;
 /** 下载中的模型数组 */
 @property (nonatomic, strong) NSMutableArray *downloadingArray;
 
@@ -39,11 +39,23 @@
 }
 - (NSMutableArray *)sessionModelsArray
 {
-    if (!_sessinModelsArray) {
-        _sessinModelsArray =@[].mutableCopy;
-        [_sessinModelsArray addObjectsFromArray:[self getSessionModels]];
+    if (!_sessionModelsArray) {
+        _sessionModelsArray =@[].mutableCopy;
+        [_sessionModelsArray addObjectsFromArray:[self getSessionModels]];
     }
-    return _sessinModelsArray;
+    return _sessionModelsArray;
+}
+- (NSMutableArray *)downloadedArray
+{
+    if (!_downloadedArray) {
+        _downloadedArray = @[].mutableCopy;
+        for (DDSessionModel *obj in self.sessionModelsArray) {
+            if ([self isCompletion:obj.url]) {
+                [_downloadedArray addObject:obj];
+            }
+        }
+    }
+    return _downloadedArray;
 }
 static DDDownloadManager *_downloadManger;
 + (instancetype)allocWithZone:(struct _NSZone *)zone
@@ -221,5 +233,58 @@ static DDDownloadManager *_downloadManger;
         }
     }
     return 0;
+}
+#pragma mark - 删除
+- (void)deleteFile:(NSString *)url {
+    NSURLSessionDataTask *task = [self getTask:url];
+    if (task) {
+        //取消下载
+        [task cancel];
+    }
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:DDFileFullpath(url)]) {
+        //删除沙盒中的资源
+        [fileManager removeItemAtPath:DDFileFullpath(url) error:nil];
+        // 删除资源总长度
+        if ([fileManager fileExistsAtPath:DDDownloadDetailPath]) {
+            // 从沙盒中移除该条模型的信息
+            for (DDSessionModel *model in self.sessionModelsArray.mutableCopy) {
+                if ([model.url isEqualToString:url]) {
+                    //关闭流
+                    [model.stream close];
+                    [self.sessionModelsArray removeObject:model];
+                }
+            }
+        }
+    }
+}
+/**
+ 清空所有下载资源
+ */
+- (void)deleteAllFile {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:DDCachesDirectory]) {
+        
+        //删除沙盒中所有资源
+        [fileManager removeItemAtPath:DDCachesDirectory error:nil];
+        //删除任务
+        [self.tasks.allValues makeObjectsPerformSelector:@selector(cancel)];
+        [self.tasks removeAllObjects];
+        
+        for (DDSessionModel *sessionModel in self.sessionModels.allValues) {
+            [sessionModel.stream close];
+        }
+        [self.sessionModels removeAllObjects];
+        
+        //删除资源总长度
+        if ([fileManager fileExistsAtPath:DDDownloadDetailPath]) {
+            [fileManager removeItemAtPath:DDDownloadDetailPath error:nil];
+            [self.sessionModelsArray removeAllObjects];
+            self.sessionModelsArray = nil;
+            [self.downloadedArray removeAllObjects];
+            [self.downloadingArray removeAllObjects];
+        }
+        
+    }
 }
 @end

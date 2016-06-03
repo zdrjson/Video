@@ -26,7 +26,7 @@
 /** 所有本地存储的所有下载信息数据数组 */
 @property (nonatomic, strong, readonly) NSMutableArray *sessionModelsArray;
 /** 下载完成的模型数组 */
-@property (nonatomic, strong, readonly) NSMutableArray *downloadArray;
+@property (nonatomic, strong, readonly) NSMutableArray *downloadedArray;
 /** 下载中的模型数组 */
 @property (nonatomic, strong, readonly) NSMutableArray *downloadingArray;
 /**
