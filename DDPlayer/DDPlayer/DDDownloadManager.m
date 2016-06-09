@@ -287,4 +287,17 @@ static DDDownloadManager *_downloadManger;
         
     }
 }
+- (BOOL)isFileDownloadForUrl:(NSString *)url withProgressBlock:(DDDownloadProgressBlock)block {
+    BOOL retValue = NO;
+    NSURLSessionDataTask *task = [self getTask:url];
+    DDSessionModel *session = [self getSessionModel:task.taskIdentifier];
+    if (session) {
+        if (block) {
+            session.progressBlock = block;
+        }
+        retValue = YES;
+    }
+    return retValue;
+}
+
 @end
