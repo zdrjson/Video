@@ -23,6 +23,7 @@
 @end
 
 @implementation DDDownloadManager
+
 - (NSMutableDictionary *)tasks
 {
     if (!_tasks) {
@@ -300,4 +301,24 @@ static DDDownloadManager *_downloadManger;
     return retValue;
 }
 
+- (NSArray *)currentDownloads {
+    NSMutableArray *currentDownloads = [NSMutableArray new];
+    [self.sessionModels enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, DDSessionModel *obj, BOOL * _Nonnull stop) {
+        [currentDownloads addObject:obj.url];
+    }];
+    return currentDownloads;
+}
+#pragma mark NSURLSessionDataDelegate
+
+// 接受到响应
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+didReceiveResponse:(NSURLResponse *)response
+ completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
+{
+    DDSessionModel *sessionModel = [self getSessionModel:dataTask.taskIdentifier];
+    
+    //打开流
+    
+}
 @end

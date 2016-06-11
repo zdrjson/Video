@@ -108,5 +108,5 @@
  
  @return 视频URL的数组
  */
-- (BOOL)currentDownloads;
+- (NSArray *)currentDownloads;
 @end
