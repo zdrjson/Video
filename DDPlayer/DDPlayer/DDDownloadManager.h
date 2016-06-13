@@ -20,6 +20,12 @@
 //存储文件信息的路径(caches)
 #define DDDownloadDetailPath [DDCachesDirectory stringByAppendingPathComponent:@"downloadDetail.data"]
 
+@protocol DDDownloadDelegate <NSObject>
+/** 下载中的回调 */
+- (void)downloadResponse:(DDSessionModel *)sessionModel;
+
+@end
+
 @interface DDDownloadManager : NSObject
 /** 保存所有下载相关信息字典 */
 @property (nonatomic, strong, readonly) NSMutableDictionary *sessionModels;
@@ -29,6 +35,8 @@
 @property (nonatomic, strong, readonly) NSMutableArray *downloadedArray;
 /** 下载中的模型数组 */
 @property (nonatomic, strong, readonly) NSMutableArray *downloadingArray;
+/** DDDownloadDelegate */
+@property (nonatomic, weak) id <DDDownloadDelegate> delegate;
 /**
  单例
  

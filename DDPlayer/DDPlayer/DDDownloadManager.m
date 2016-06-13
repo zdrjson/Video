@@ -339,7 +339,59 @@ didReceiveResponse:(NSHTTPURLResponse *)response
     
     //接受这个请求，允许接收服务器的数据
     completionHandler(NSURLSessionResponseAllow);
+}
+/**
+ 接收到服务器返回的数据
+ */
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    DDSessionModel *sessionModel = [self getSessionModel:dataTask.taskIdentifier];
     
+    //写入数据
+    [sessionModel.stream write:data.bytes maxLength:data.length];
     
+    //下载进度
+    NSUInteger receivedSize = DDDownloadLength(sessionModel.url);
+    NSUInteger expectedSize = sessionModel.totalLength;
+    CGFloat progress = 1.0 * receivedSize / expectedSize;
+    
+    //每秒下载速度
+    NSTimeInterval downloadTime = -1 * [sessionModel.starTime timeIntervalSinceNow];
+    NSLog(@"%f",downloadTime);
+    NSUInteger speed = receivedSize / downloadTime;
+    if (speed == 0)  return ;
+    float speedSec = [sessionModel calculateFieSizeInUnit:(unsigned long long)speed];
+    NSString *unit = [sessionModel calculateUnit:(unsigned long long)speed];
+    NSString *speedStr = [NSString stringWithFormat:@"%.2f%@/s",speedSec,unit];
+    
+    //剩余下载时间
+    NSMutableString *remainingTimeStr = [[NSMutableString alloc] init];
+    unsigned long long remainingContentLength = expectedSize - receivedSize;
+    int remainingTime = (int)(remainingContentLength / speed);
+    int hours = remainingTime / 3600;
+    int minutes = (remainingTime - hours * 3600) / 60;
+    int seconds = remainingTime - hours * 3600 -minutes * 60;
+    
+    if (hours > 0) {
+        [remainingTimeStr appendFormat:@"%d 小时",hours];
+         [remainingTimeStr appendFormat:@"%d 分",minutes];
+         [remainingTimeStr appendFormat:@"%d 秒",seconds];
+    }
+    
+    NSString *writtenSize = [NSString stringWithFormat:@"%.2f %@",[sessionModel calculateFieSizeInUnit:(unsigned long long)receivedSize], [sessionModel calculateUnit:(unsigned long long)receivedSize]];
+    
+    if (sessionModel.stateBlock) {
+        sessionModel.stateBlock(DDSessionModelStart);
+    }
+    
+    if (sessionModel.progressBlock) {
+        sessionModel.progressBlock(progress, speedStr, remainingTimeStr, writtenSize, sessionModel.totalSize);
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.delegate respondsToSelector:@selector(downloadResponse:)]) {
+            [self.delegate downloadResponse:sessionModel];
+        }
+    });
 }
 @end
