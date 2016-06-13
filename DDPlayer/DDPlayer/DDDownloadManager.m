@@ -311,14 +311,35 @@ static DDDownloadManager *_downloadManger;
 #pragma mark NSURLSessionDataDelegate
 
 // 接受到响应
-
+/**
+ - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSHTTPURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition))completionHandler
+ */
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
-didReceiveResponse:(NSURLResponse *)response
+didReceiveResponse:(NSHTTPURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
     DDSessionModel *sessionModel = [self getSessionModel:dataTask.taskIdentifier];
     
     //打开流
+    [sessionModel.stream open];
+    //获得服务器这次请求返回数据的总长度
+    NSInteger totalLength = [response.allHeaderFields[@"Content-Length"] integerValue] + DDDownloadLength(sessionModel.url);
+    sessionModel.totalLength = totalLength;
+    
+    //总文件大小
+    NSString *fileSizeInUnits = [NSString stringWithFormat:@"%.2f %@",[sessionModel calculateFieSizeInUnit:(unsigned long long)totalLength],[sessionModel calculateUnit:(unsigned long long)totalLength]];
+    sessionModel.totalSize = fileSizeInUnits;
+    //更新数据(文件总长度)
+    [self save:self.sessionModelsArray];
+    
+    //添加下载中数组
+    if (![self.downloadingArray containsObject:sessionModel]) {
+        [self.downloadingArray addObject:sessionModel];
+    }
+    
+    //接受这个请求，允许接收服务器的数据
+    completionHandler(NSURLSessionResponseAllow);
+    
     
 }
 @end
