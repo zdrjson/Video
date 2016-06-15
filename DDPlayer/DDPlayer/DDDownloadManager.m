@@ -394,4 +394,40 @@ didReceiveResponse:(NSHTTPURLResponse *)response
         }
     });
 }
+/*
+ *  请求成功（成功|失败）
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    DDSessionModel *sessionModel = [self getSessionModel:task.taskIdentifier];
+    if (!sessionModel)  return ;
+    
+    //关闭流
+    [sessionModel.stream close];
+    sessionModel.stream = nil;
+    
+    if ([self isCompletion:sessionModel.url]) {
+        //下载完成
+        sessionModel.stateBlock(DDSessionModelCompleted);
+    } else if (error) {
+        //下载失败
+        sessionModel.stateBlock(DDSessionModelFailed);
+    }
+    
+    //清除任务
+    [self.tasks removeObjectForKey:DDFileName(sessionModel.url)];
+    [self.sessionModels removeObjectForKey:@(task.taskIdentifier).stringValue];
+    
+    [self.downloadingArray removeObject:sessionModel];
+    
+    if (error.code == -999) {
+        return;  // cancel
+    }
+    
+    if (![self.downloadedArray containsObject:sessionModel]) {
+        [self.downloadedArray addObject:sessionModel];
+    }
+    
+    
+}
 @end
