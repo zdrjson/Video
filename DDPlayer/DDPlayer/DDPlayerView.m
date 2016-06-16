@@ -233,15 +233,31 @@ typedef NS_ENUM(NSUInteger, DDPlayerState) {
 - (void)autoFadeOutControlBar {
 	
 }
-
+/**
+ 创建timer
+ */
 - (void)createTimer {
-	
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(playerTimerAction) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
-
+/**
+ 创建手势
+ */
 - (void)createGesture {
-	
+	//单击
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapActinon:)];
+    //双击(播放/暂停)
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapAction:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:doubleTap];
+    
+    [tap requireGestureRecognizerToFail:doubleTap];
+    
 }
-
+/**
+ 获取系统音量
+ */
 - (void)configureVolume{
     MPVolumeView *volumeView = [[MPVolumeView alloc] init];
     _volumViewSlider = nil;
